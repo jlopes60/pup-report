@@ -1,6 +1,6 @@
 #jlopes, Thu Nov 30 11:50:38 2023
 
-SRC=report
+SRC=report_pup
 
 latexmk:
 	latexmk -pdf -bibtex -recorder -pvc $(SRC).tex

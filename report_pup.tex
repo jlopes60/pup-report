@@ -1,40 +1,48 @@
-%% FE/UP project style for LaTeX2e
+%% Project FE-UP style for LaTeX2e
 %% 
 %% FEUP, JCL,  Fri Dec  1 01:10:53 2023
 %%
-%%
 %% PLEASE send improvements to jlopes at fe.up.pt
-%%
 
 \documentclass[11pt,a4paper]{report}
 
 %%------------------------------- preamble ------------------------------------
 
 %% comment next for EN
-\usepackage[portuges]{babel}      % PT
+\usepackage[portuges]{babel}      % language PT 
 \usepackage[utf8]{inputenc}       % accents
 \usepackage[T1]{fontenc}          % PS fonts
 \usepackage{newtx}                % do not use CM fonts
-\usepackage{amsmath}  
-\usepackage{setspace}
-\usepackage{graphicx}
-\usepackage[normalem]{ulem}
-\usepackage{caption}
+\usepackage{amsmath}              % multi-line and other mathematical statements,
+\usepackage{setspace}             % setting the spacing between lines
+\usepackage{graphicx}             % go far beyond what the graphics package
+\usepackage[normalem]{ulem}       % various types of underlining
+\usepackage{caption}              % rotating captions, sideways captions, etc.
 \usepackage{float}                % tables and figures in the multi-column environment 
-\usepackage{subcaption}				
-\usepackage{longtable}
-\usepackage{multirow}
-\usepackage[table]{xcolor}
+\usepackage{subcaption}           % for subfigures and the like
+\usepackage{longtable}            % tables that continue to the next page
+\usepackage{multirow}             % tabular cells spanning multiple rows
+\usepackage[table]{xcolor}        % driver-independent color extensions
 \usepackage{lipsum}               % loren dummy text
 \setlength{\marginparwidth}{2cm}  % todonotes' requirements
 \usepackage{todonotes}            % todo's
 \usepackage{chicago}              % bibliography style
 
-%% geometry 
+%% document dimensions
 \usepackage[a4paper, left=25mm, right=25mm, top=25mm, bottom=25mm,
    headheight=6mm, footskip=12mm]{geometry}
 \setlength{\parindent}{0em}
 \setlength{\parskip}{1ex}
+
+%% headers & footers
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\fancyhf{}                            % clear off all default fancyhdr headers and footers
+\lfoot{\small{\emph{\projtitle, \projsubtitle}}}
+\rfoot{\small{\thepage\ / \pageref{LastPage}}}
+\pagestyle{fancy}                     % apply the fancy header style
+\renewcommand{\headrulewidth}{0.0pt}  % no head rule
+\renewcommand{\footrulewidth}{0.4pt}
 
 %% colors
 \usepackage{color}
@@ -67,16 +75,6 @@
  morekeywords={*,var,template,new}  % if you want to add more keywords to the set
 }
 
-%% headers & footers
-\usepackage{lastpage}
-\usepackage{fancyhdr}
-\fancyhf{}                          % clear off all default fancyhdr headers and footers
-\lfoot{\small{\emph{\projtitle, \projsubtitle}}}
-\rfoot{\small{\thepage\ / \pageref{LastPage}}}
-\pagestyle{fancy}                   % apply the fancy header style
-\renewcommand{\headrulewidth}{0.0pt}  % no head rule
-\renewcommand{\footrulewidth}{0.4pt}
-
 %% hyperreferences (HREF, URL)
 \usepackage{hyperref}
 \hypersetup{
@@ -97,9 +95,6 @@
 %% path to the figures directory
 \graphicspath{{figures/}}
 
-%% hyphenation hints, if needed
-%\hyphenation{In-fra-es-tru-tu-ras}
-
 %% macros, to be updated as needed
 \newcommand{\school}{Faculdade de Engenharia da Universidade do Porto}
 \newcommand{\degree}{Licenciatura em Engenharia Informática e Computação}
@@ -108,17 +103,16 @@
 \newcommand{\projsubtitle}{Subtítulo do Trabalho}
 \newcommand{\projteam}{Equipa 1LEIC11-1}
 
-%% my macros
+%% my other macros, if needed
 \newcommand{\windspt}{\textsf{WindsPT\/}}
 \newcommand{\windscannerpt}{\emph{Windscanner.PT\/}}
-
 \newcommand{\class}[1]{{\normalfont\slshape #1\/}}
 \newcommand{\svg}{\class{SVG}}
 
 %% my environments for infos
-\newenvironment{info}[1]{\vspace*{6mm}[ \begin{em} #1}
+\newenvironment{info}[1]{\vspace*{6mm}\color{blue}[ \begin{em} #1}
                         {\vspace*{6mm}\end{em} ]}
-\newenvironment{infoopt}[1]{\vspace*{6mm}[ \textbf{Elemento opcional.} \begin{em} #1}
+\newenvironment{infoopt}[1]{\vspace*{6mm}\color{blue}[ \textbf{Elemento opcional.} \begin{em} #1}
                         {\vspace*{6mm}\end{em} ]}
 
 %%------------------------------- document-------------------------------------
@@ -153,10 +147,8 @@
         Nome do Autor4 $<$email2@up.pt$>$}\\[2mm]
 {\large Nome do Autor5 $<$email1@up.pt$>$ \hspace*{12mm}
         Nome do Autor6 $<$email2@up.pt$>$}\\[2mm]
-{\large Nome do Autor7 $<$email1@up.pt$>$}
+{\large Nome do Autor7 $<$email1@up.pt$>$}\\[10mm]
 
-\vspace*{10mm}
-%% uncommnet next, if needed
 %\renewcommand{\today}{15 de dezembro de 2023}
 \today
 
@@ -201,7 +193,7 @@ relatório.
 Podem fazer-se numa página autónoma ou incluir-se na introdução.
 \end{infoopt}
 
-%%------------------------------- table of contents ---------------------------
+%%------------------------------- table of contenys ---------------------------
 
 \tableofcontents
 
@@ -302,9 +294,8 @@ Para saber mais consulte o tutorial online
 
 \chapter{Introdução}
 
-\pagestyle{fancy}
-% reset and change to roman page numbers
-\pagenumbering{arabic}\setcounter{page}{1}
+\pagestyle{fancy}                           % display header & footer
+\pagenumbering{arabic}\setcounter{page}{1}  %  reset page and roman numbers
 
 \begin{info}
 Contextualização sucinta do assunto do relatório, fazendo-se
