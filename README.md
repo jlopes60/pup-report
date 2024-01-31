@@ -1,3 +1,4 @@
-# Project FE/UP template
+# pup-report
+## LaTeX2e template for FEUP's Project FE-UP
 
-The published versions lives in Overleaf
+The published version lives in Overleaf
