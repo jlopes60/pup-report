@@ -34,14 +34,16 @@
 \setlength{\parskip}{1ex}
 
 %% headers & footers
-\usepackage{lastpage}
+%\usepackage{lastpage}
 \usepackage{fancyhdr}
 \fancyhf{}                            % clear off all default fancyhdr headers and footers
-\lfoot{\small{\emph{\projtitle, \projsubtitle}}}
-\rfoot{\small{\thepage\ / \pageref{LastPage}}}
+\chead{\small{\emph{\projtitle, \projsubtitle}}}
+\cfoot{\small{\thepage}}
+%\lfoot{\small{\emph{\projtitle, \projsubtitle}}}
+%\rfoot{\small{\thepage\ / \pageref{LastPage}}}
 \pagestyle{fancy}                     % apply the fancy header style
 \renewcommand{\headrulewidth}{0.0pt}  % no head rule
-\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.0pt}
 
 %% colors
 \usepackage{color}
@@ -67,7 +69,7 @@
  showstringspaces=false,            % underline spaces within strings
  showtabs=false,                    % show tabs within strings adding particular underscores
  tabsize=2,                         % sets default tabsize to 2 spaces
- captionpos=b,                      % sets the caption-position to bottom
+ captionpos=t,                      % sets the caption-position to top
  breaklines=true,                   % sets automatic line breaking
  breakatwhitespace=false,           % sets if automatic breaks should only happen at whitespace
  escapeinside={\%*}{*)},            % if you want to add a comment within your code
@@ -105,7 +107,7 @@
 %% my other macros, if needed
 \newcommand{\windspt}{\textsf{WindsPT\/}}
 \newcommand{\windscannerpt}{\emph{Windscanner.PT\/}}
-\newcommand{\class}[1]{{\normalfont\slshape #1\/}}
+\newcommand{\class}[1]{{\normalfont\sffamily #1\/}}
 \newcommand{\svg}{\class{SVG}}
 
 %% my environments for infos
@@ -208,6 +210,9 @@ Podem fazer-se numa página autónoma ou incluir-se na introdução.
 \end{infoopt}
 
 %%------------------------------- table of contenys ---------------------------
+
+%% redefine tableofcontents text, ONLY for PT
+\renewcommand{\contentsname}{Índice}
 
 \tableofcontents
 
@@ -410,13 +415,14 @@ descritas no texto, com as fontes devidamente explicitadas, para
 evitar o plágio.
 \end{info}
 
-Como exemplo, a Figura~\ref{fig:campus} (retirada de
-\url{www.fe.up.pt}) mostra o \emph{campus} da FEUP. 
+Como exemplo, a Figura~\ref{fig:campus} 
+%(retirada de \url{www.fe.up.pt}) 
+mostra o \emph{campus} da FEUP. 
 
 \begin{figure}
 \centering
 \includegraphics[width=0.8\textwidth]{campus}
-\caption{Fotografia aérea do Campus da FEUP.} \label{fig:campus}
+\caption[Fotografia aérea do Campus da FEUP]{Fotografia aérea do Campus da FEUP~\cite{kn:figura}.} \label{fig:campus}
 \end{figure}
 
 \begin{info}
@@ -430,14 +436,14 @@ exemplo, a Figura~\ref{fig:natal}.
   \caption{O Natal no Campus da FEUP.} \label{fig:natal}
 \end{figure}
 
-A Tabela~\ref{tab:feup} (excerto adaptado de ``A FEUP em números'', 2011)
+A Tabela~\ref{tab:feup} % (excerto adaptado de ``A FEUP em números'', 2011)
 serve para exemplificar como mostrar alguns valores que neste caso têm
 a ver com alguns dados numéricos associados a recursos e investimentos
 da FEUP no ano de 2011. 
 
 \begin{table} [b]
   \centering
-  \caption{Recursos Físicos da FEUP}
+  \caption[Recursos Físicos da FEUP]{Recursos Físicos da FEUP. Adaptado de~\cite{kn:tabela}}
   \begin{tabular}{| l | c |}
     \hline
     \textbf{Designação} & \textbf{Quantidade}\\\hline
@@ -530,11 +536,27 @@ for i in words:
 \begin{info}
 De seguida é ilustrada a utlização de macros \LaTeX{} definidas no
 preâmbulo.
+De salientar o uso da macro \verb!\class{}! para classes, métodos e componentes.
 \end{info}
 
-O \windspt, retirado do \windscannerpt, usa o \svg\ \ldots
+O \windspt, retirado do \windscannerpt, usa o \svg\ \ldots\ como em \class{Student.calculate-age()}.
 
 \lipsum[2]
+
+\subsection*{O travessão}
+
+Sobre o uso do hífen e do travessão\footnote{"Ciberdúvidas da Língua Portuguesa", \url{https://ciberduvidas.iscte-iul.pt/consultorio/perguntas/o-uso-do-hifen-e-do-travessao/31251}}: 
+\begin{enumerate}
+    \item O hífen (Alt + 0045): sem espaços em branco (-);
+    \item O travessão (ou travessão duplo)/em-dash(1) (Alt + 0151): em português, envolto em espaços em branco (---);
+    \item O traço de ligação/en dash (Alt + 150): sem espaços em branco (--);
+    \item O sinal matemático de subtração: sem espaços em branco (–).
+\end{enumerate}
+
+\subsection*{As aspas}
+
+Sobre as aspas  em \LaTeX, ou é usado o slifo diretamente, ou então são feitas com o acento para trás no início e a plica no fim, como em ``exemplo''\footnote{What is the best way to use quotation mark glyphs? 
+\url{https://tex.stackexchange.com/questions/531/what-is-the-best-way-to-use-quotation-mark-glyphs}}.
 
 %%------------------------------- chapter ------------------------------------
 
@@ -554,6 +576,8 @@ das conclusões extraídas (como por exemplo áreas adicionais para
 estudo ou decisões de produção).
 Devem justificar-se com base no estudo ou investigação descritos.
 
+A ordem dos elementos Conclusões e Recomendações é flexível, podendo ser inversa, se o contexto/instituição o exigir.
+
 Para saber mais consulte o tutorial online 
 ``\href{https://docs.google.com/document/d/1TDC1behVq8x7fQL4CcPEEh_np5GXviJevQxnQ9gbiJs/edit}
 {Guia de Apoio à Publicação}''.
@@ -570,6 +594,8 @@ forma de responder à pergunta inicial do projeto.
 Por esse motivo não deve ser um texto de detalhe, num texto em que
 se apresente algo de novo, mas um texto de afirmação que deve ser lido
 de forma independente do restante relatório.
+
+A ordem dos elementos Conclusões e Recomendações é flexível, podendo ser inversa, se o contexto/instituição o exigir.
 
 Para saber mais consulte o tutorial online 
 ``\href{https://docs.google.com/document/d/1TDC1behVq8x7fQL4CcPEEh_np5GXviJevQxnQ9gbiJs/edit}
