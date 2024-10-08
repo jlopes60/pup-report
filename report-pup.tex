@@ -26,7 +26,8 @@
 \usepackage{lipsum}               % loren dummy text
 \setlength{\marginparwidth}{2cm}  % todonotes' requirements
 \usepackage{todonotes}            % todo's
-\usepackage{chicago}              % bibliography style
+\usepackage{csquotes}             % context sensitive quotation facilities
+\usepackage[backend=biber,authordate]{biblatex-chicago}  %% Chicago Manual of Style
 
 %% document dimensions
 \usepackage[a4paper,left=25mm,right=25mm,top=25mm,bottom=25mm,headheight=6mm,footskip=12mm]{geometry}
@@ -34,7 +35,6 @@
 \setlength{\parskip}{1ex}
 
 %% headers & footers
-%\usepackage{lastpage}
 \usepackage{fancyhdr}
 \fancyhf{}                            % clear off all default fancyhdr headers and footers
 \chead{\small{\emph{\projtitle, \projsubtitle}}}
@@ -70,6 +70,7 @@
  showtabs=false,                    % show tabs within strings adding particular underscores
  tabsize=2,                         % sets default tabsize to 2 spaces
  captionpos=t,                      % sets the caption-position to top
+ belowcaptionskip=12pt,             % space between caption and listing
  breaklines=true,                   % sets automatic line breaking
  breakatwhitespace=false,           % sets if automatic breaks should only happen at whitespace
  escapeinside={\%*}{*)},            % if you want to add a comment within your code
@@ -95,6 +96,9 @@
 
 %% path to the figures directory
 \graphicspath{{figures/}}
+
+%% bibliography file, must be in preamble
+\addbibresource{bibliography.bib}
 
 %% macros, to be updated as needed
 \newcommand{\school}{Faculdade de Engenharia da Universidade do Porto}
@@ -415,8 +419,7 @@ descritas no texto, com as fontes devidamente explicitadas, para
 evitar o plágio.
 \end{info}
 
-Como exemplo, a Figura~\ref{fig:campus} 
-%(retirada de \url{www.fe.up.pt}) 
+Como exemplo, a Figura~\ref{fig:campus} % (retirada de \url{www.fe.up.pt}) 
 mostra o \emph{campus} da FEUP. 
 
 \begin{figure}
@@ -511,24 +514,23 @@ informação''\footnote{\url{https://feup.libguides.com/plagio/citar}}.
 De seguida é ilustrado como incluir código no documento.
 \end{info}
 
+Listing~\ref{code:useless} 
 \lipsum[4]
 
-\begin{lstlisting}[language=Python, caption=Python example]
-# take the users input
+\begin{lstlisting}[language=Python, caption=Python example, label=code:useless]
+# Take the user's input
 words = input("Enter the text to translate to pig latin: ")
 print(f"You entered: {words}")
 
-# now, break apart the words into a list
+# Break apart the words into a list
 words = words.split(' ')
 
-# let's use the list to translate words greater than 3 characteres
-for i in words:
-    if len(i) >= 3:
-        i = i + "%say" % (i[0])
-        i = i[1:]
-        print(i)
-    else:
-        pass
+# Use a list comprehension to translate words greater than or equal to 3 characters
+translated_words = [(w[1:] + w[0] + "ay") for w in words if len(w) >= 3 ]
+
+# Print each translated word
+for word in translated_words:
+    print(word)
 \end{lstlisting}
 
 \subsection{Uso das macros}
@@ -545,7 +547,8 @@ O \windspt, retirado do \windscannerpt, usa o \svg\ \ldots\ como em \class{Stude
 
 \subsection*{O travessão}
 
-Sobre o uso do hífen e do travessão\footnote{"Ciberdúvidas da Língua Portuguesa", \url{https://ciberduvidas.iscte-iul.pt/consultorio/perguntas/o-uso-do-hifen-e-do-travessao/31251}}: 
+Sobre o uso do hífen e do travessão\footnote{"Ciberdúvidas da Língua Portuguesa", 
+\url{https://ciberduvidas.iscte-iul.pt/consultorio/perguntas/o-uso-do-hifen-e-do-travessao/31251}}: 
 \begin{enumerate}
     \item O hífen (Alt + 0045): sem espaços em branco (-);
     \item O travessão (ou travessão duplo)/em-dash(1) (Alt + 0151): em português, envolto em espaços em branco (---);
@@ -611,8 +614,9 @@ projeto.
 \end{info}
 
 \renewcommand{\bibname}{Referências bibliográficas}
-\bibliographystyle{chicago}
-\bibliography{refs}
+%\bibliographystyle{chicago}
+%\bibliography{refs}
+\printbibliography
 \addcontentsline{toc}{chapter}{\refname}  % add it to table of contents
 
 \begin{info}
@@ -633,7 +637,10 @@ Os apêndices e os anexos contêm informação que complementa, apoia e
 clarifica o relatório e cuja inclusão no corpo principal do relatório
 interferiria com uma boa ordem de apresentação das ideias.
 
-Há uma diferença importante entre apêndices e anexos.
+Há uma diferença importante entre apêndices e anexos: ``No apêndice
+compilam-se apenas os documentos que são da autoria do autor do
+relatório, enquanto no anexo se compilam os documentos de autoria de
+outros autores que não o do relatório.''.
 
 Para saber mais consulte o tutorial online 
 ``\href{https://docs.google.com/document/d/1TDC1behVq8x7fQL4CcPEEh_np5GXviJevQxnQ9gbiJs/edit}
