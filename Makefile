@@ -7,11 +7,6 @@ SRC=report-pup
 latexmk:
 	latexmk -pdf -recorder -pvc $(SRC).tex
 
-## typeset using pdflatex
-
-pdflatex:
-	pdflatex $(SRC)
-
 ## clean temporary files
 
 clean: 

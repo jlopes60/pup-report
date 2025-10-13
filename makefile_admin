@@ -3,7 +3,7 @@
 DOC=pup-report
 VERSION=`date "+%Y%m%d"`
 
-DIST=$(DOC)-$(VERSION).zip
+DIST=$(DOC)_$(VERSION).zip
 
 # do nothing by default
 nothing:
