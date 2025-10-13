@@ -25,11 +25,11 @@ Here’s a quick, practical guide to getting productive with TeXmaker on Windows
 
 Open Options → Configure TeXmaker:
 
-2.1) Commands
+Commands
 
 - Ensure paths for pdflatex, xelatex, lualatex, biber, bibtex are auto-detected.
 
-2.2) Quick Build
+Quick Build
 
 - PdfLaTeX + Bib(la)tex + PdfLaTeX (x2) + View PDF (for biblatex/biber)
 - Viewer: pick Built-in PDF viewer
