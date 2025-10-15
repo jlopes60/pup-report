@@ -1,4 +1,5 @@
 # pup-report
+
 ## LaTeX2e template for FEUP's Project FE-UP
 
 The published version lives in Overleaf
@@ -11,31 +12,68 @@ To do this, you need to:
 
 2) use a convenient editor (TeXstudio, VS Code + LaTeX Workshop, TeXMaker
 
-# using TeXMaker
+---
 
-Here’s a quick, practical guide to getting productive with TeXmaker on Windows or Linux.
+## Compile LaTeX in **VSCode** on Linux or Windows.
 
-1) Install the basics
+### 1) Install the prerequisites
 
-- Linux: Install TeX Live via your package manager (`sudo apt install texlive-full` on Ubuntu/Debian).
-- Windows: Install MiKTeX (easy) or TeX Live (complete).
-- Then install TeXmaker (available for both platforms; `sudo apt install texmaker` on Ubuntu/Debian).
+* Install a TeX distribution:
 
-2) First-run setup in TeXmaker (2 minutes)
+  * **Windows:** MiKTeX (easy) or TeX Live (complete)
+  * **Linux:** TeX Live (`sudo apt install texlive-full` on Ubuntu/Debian)
+* Install **VS Code**.
+* Install the extension **LaTeX Workshop** (by James Yu).
 
-Open Options → Configure TeXmaker:
+> Tip: If you’ll use `minted` for code highlighting, also install Python and `pip install Pygments`.
 
-Commands
+### 2) Basic workflow (works out of the box)
 
-- Ensure paths for pdflatex, xelatex, lualatex, biber, bibtex are auto-detected.
+1. Open your LaTeX folder in VS Code.
+2. Open your **main** file (e.g., `main.tex`).
+3. Press **Ctrl+Shift+P** → “**LaTeX Workshop: Build LaTeX project**”
+   or click the **TeX** icon in the sidebar → **Build LaTeX project**.
+4. The extension runs **latexmk** by default and shows the PDF in the built-in viewer.
 
-Quick Build
+If latexmk is missing, let MiKTeX install it on-the-fly or install the `latexmk` package in TeX Live.
 
-- PdfLaTeX + Bib(la)tex + PdfLaTeX (x2) + View PDF (for biblatex/biber)
-- Viewer: pick Built-in PDF viewer
+### 3) Switching engines & backends (the easy way)
 
-3) Compile & preview
+Add *magic comments* at the top of your `.tex` file:
 
-- Open your main .tex file (the one with \begin{document}).
-- Click Quick Build (toolbar) to compile and open the PDF.
-- Read errors in Logs; always fix the first error shown.
+```tex
+% !TeX program = pdflatex     % or xelatex / lualatex
+% !BIB program = biber        % or bibtex
+% !TeX root = main.tex        % if this file isn't the root
+```
+
+LaTeX Workshop respects these and picks the right engine/backend.
+
+### 4) Recipes you may want (optional settings)
+
+The extension already has sane defaults. If you want explicit recipes (e.g., shell-escape), create or edit `.vscode/settings.json` in your project:
+
+```json
+{
+  "latex-workshop.latex.tools": [
+    { "name": "pdflatex", "command": "pdflatex", "args": ["-synctex=1","-interaction=nonstopmode","-file-line-error","%DOC%"] },
+    { "name": "xelatex",  "command": "xelatex",  "args": ["-synctex=1","-interaction=nonstopmode","-file-line-error","%DOC%"] },
+    { "name": "lualatex", "command": "lualatex", "args": ["-synctex=1","-interaction=nonstopmode","-file-line-error","%DOC%"] },
+    { "name": "biber",    "command": "biber",    "args": ["%DOCFILE%"] },
+    { "name": "pdflatex-shell", "command": "pdflatex", "args": ["-synctex=1","-interaction=nonstopmode","-file-line-error","-shell-escape","%DOC%"] }
+  ],
+  "latex-workshop.latex.recipes": [
+    { "name": "PDFLaTeX ➜ View", "tools": ["pdflatex","pdflatex"] },
+    { "name": "XeLaTeX ➜ View",  "tools": ["xelatex","xelatex"] },
+    { "name": "LuaLaTeX ➜ View", "tools": ["lualatex","lualatex"] },
+    { "name": "PDFLaTeX + Biber", "tools": ["pdflatex","biber","pdflatex","pdflatex"] },
+    { "name": "PDFLaTeX (shell-escape)", "tools": ["pdflatex-shell","pdflatex-shell"] }
+  ],
+  "latex-workshop.view.pdf.viewer": "tab",              // built-in viewer
+  "latex-workshop.latex.autoBuild.run": "onSave",       // optional: build on save
+  "latex-workshop.message.error.show": false,           // optional: reduce popups
+  "latex-workshop.message.warning.show": false
+}
+```
+
+Use the recipe picker: **Ctrl+Shift+P** → “LaTeX Workshop: Build with recipe”.
