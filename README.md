@@ -77,3 +77,43 @@ The extension already has sane defaults. If you want explicit recipes (e.g., she
 ```
 
 Use the recipe picker: **Ctrl+Shift+P** → “LaTeX Workshop: Build with recipe”.
+
+---
+
+## Compile LaTeX with TeXmaker on Windows or Linux
+
+Here’s a quick, practical guide to getting productive with **TeXmaker** on Windows or Linux.
+
+#### 1) Install the basics
+
+* **Windows:** Install **MiKTeX** (easy) or **TeX Live** (complete).
+* **Linux:** Install **TeX Live** via your package manager (e.g., `sudo apt install texlive-full` on Ubuntu/Debian).
+* Then install **TeXmaker** (available for both platforms).
+
+> Tip: If you’ll use `minted` for code highlighting, install Python + `pip install Pygments`.
+
+### 2) First-run setup in TeXmaker (2 minutes)
+
+Open **Options → Configure TeXmaker**:
+
+**Commands**
+
+* Ensure paths for `pdflatex`, `xelatex`, `lualatex`, `biber`, `bibtex` are auto-detected.
+* For projects using `minted`, add **`-shell-escape`** to the **PdfLaTeX** command (e.g., `pdflatex -synctex=1 -interaction=nonstopmode -shell-escape %.tex`).
+
+**Quick Build**
+
+* Choose a preset matching your project:
+
+  * **PDFLaTeX + Biber + PDFLaTeX (x2) + View PDF** (for `biblatex`/`biber`)
+  * **PDFLaTeX + BibTeX + PDFLaTeX (x2) + View PDF** (for classic BibTeX)
+  * **XeLaTeX + …** (if your template needs Unicode fonts or `fontspec`)
+* Viewer: pick **Built-in PDF viewer** (easiest for SyncTeX).
+
+### 3) Compile & preview
+
+* Open your main `.tex` file (the one with `\begin{document}`).
+* Click **Quick Build** (toolbar) to compile and open the PDF.
+* Read errors in **Logs**; always fix the **first** error shown.
+
+> SyncTeX: with the built-in viewer, you can jump between source and PDF (source ↔ PDF sync is on by default).
