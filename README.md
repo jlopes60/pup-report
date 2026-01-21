@@ -10,7 +10,7 @@ To do this, you need to:
 
 1) have a local distribution to compile the sources (MiKTeX, TeX Live)
 
-2) use a convenient editor (VSCode + LaTeX Workshop, TeXMaker, TeXstudio
+2) use a convenient editor (VSCode + LaTeX Workshop, TeXMaker, TeXstudio)
 
 ---
 
