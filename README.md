@@ -19,9 +19,8 @@ To do this, you need to:
 ### 1) Install the prerequisites
 
 * Install a TeX distribution:
-
+  * **Linux:** TeX Live (on Ubuntu/Debian: `sudo apt install texlive-full`)
   * **Windows:** MiKTeX (easy) or TeX Live (complete)
-  * **Linux:** TeX Live (`sudo apt install texlive-full` on Ubuntu/Debian)
 * Install **VS Code**.
 * Install the extension **LaTeX Workshop** (by James Yu).
 
