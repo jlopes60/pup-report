@@ -2,7 +2,7 @@
 
 ## LaTeX2e template for FEUP's Project FE-UP
 
-The published version lives in Overleaf
+The published version lives in Overleaf.
 
 Given the limitations on Overleaf's compilation time, it may be necessary to use the sources locally.
 
