@@ -2,8 +2,6 @@
 %% 
 %% FEUP, JCL,  Fri Dec  1 01:10:53 2023
 %%
-%% PLEASE send improvements to jlopes at fe.up.pt (up till 2028 :-)
-
 %% v2025:
 %% - added support for SI Unit rules and style conventions
 %% - added acronyms using the corresponding package
@@ -28,6 +26,7 @@
 \usepackage{multirow}             % tabular cells spanning multiple rows
 \usepackage{booktabs}             % to create professional-quality tables
 \usepackage[table]{xcolor}        % driver-independent color extensions
+\usepackage{xurl}                 % URL-sensitive line breaks
 \usepackage{lipsum}               % loren dummy text
 \setlength{\marginparwidth}{2cm}  % todonotes' requirements
 \usepackage{todonotes}            % todo's
@@ -145,7 +144,7 @@
 \center
 
 \vspace*{-12mm}
-{\large \textbf{\textsc{\school}}}\\
+{\Large \textbf{\textsc{\school}}}\\
 
 \vfill
 
@@ -162,7 +161,7 @@
 
 \vfill
 
-{\Large \textbf{\projfeup}}\\[12mm]
+{\Large \textbf{\textsc{\projfeup}}}\\[12mm]
 
 {\Large \textbf{Coordenação}}\\[4mm]
 {\large Geral: Manuel Firmino e Sara Ferreira \hspace*{18mm}
@@ -181,6 +180,7 @@
         Nome do Autor6 $<$email2@up.pt$>$}\\[2mm]
 {\large Nome do Autor7 $<$email1@up.pt$>$}\\[8mm]
 
+\vspace{\fill}
 %\renewcommand{\today}{15 de dezembro de 2023}
 \today
 
@@ -211,7 +211,13 @@ Publicação'', secção:
 \todo[inline]{Escrever o Resumo, mas só no fim.}
 
 \vspace{\fill}
-{\Large \textbf{Palavras-chave}:} Palavra1, Palavra2, Palavra3, Palavra4
+\begin{flushleft}
+{\Large \textbf{Palavras-chave}:} 
+keyword1 \(\bullet\) 
+keyword2 \(\bullet\)
+keyword3 \(\bullet\)
+keyword4
+\end{flushleft}
 \vspace*{24mm}
 
 \acresetall %% to reset the acronym usage
@@ -273,12 +279,15 @@ elementos complementares à compreensão do texto.
 \chapter*{Lista de acrónimos}
 \addcontentsline{toc}{chapter}{Lista de acrónimos}
 
-\begin{acronym}[WWW] % The longest acronym goes here (for alignment)
+%% sort acronym entries manualy yourself
+%% only the acronyms used in the text will be printed
+
+\begin{acronym}[123456] % The longest acronym goes here (for alignment)
   \acro{API}{\textit{Application Programming Interface}}
-  \acro{IA}{Inteligência Artificial}
   \acro{ASCII}{American Standard Code for Information Interchange}
   \acro{GPU}{\textit{Graphics Processing Unit}}
   \acro{FEUP}{Faculdade de Engenharia da Universidade do Porto}
+  \acro{IA}{Inteligência Artificial}
   \acro{ML}{\textit{Machine Learning}}
   \acro{PLN}{Processamento de Linguagem Natural}
   \acro{WWW}{World Wide Web}
@@ -505,8 +514,8 @@ De seguida exemplificam-se, ao acaso, algumas citações (por paráfrase)
 de acordo com esse estilo.
 \end{info}
 
-A decisão de escolha de um tema para um trabalho académico pode
-variar~\parencite{kn:Bel02-book}.
+\textcite{kn:Bel02-book} refere que a decisão de escolha de um tema 
+para um trabalho académico pode variar.
 O tema pode ser pensado e escolhido pelo próprio estudante, ou a
 partir de uma lista de temas já concebidos, com potencial interesse
 para estudo~\parencite{kn:GLPR14-joPhysics}.
@@ -550,7 +559,7 @@ serve para exemplificar o alinhamento nas colunas com números, e nada tem a ver
 
 \begin{table}
   \centering
-  \caption[Physical Resources of \acs*{FEUP}]{Physical Resources of \acs*{FEUP}.}
+  \caption{A table, caption on top.}
   \begin{tabular}{@{}S@{}}
     \toprule
     {Some Values} \\
@@ -594,7 +603,7 @@ Listing~\ref{code:useless} \lipsum[4]
 
 \lipsum[4]
 
-\begin{lstlisting}[language=Python, caption=Python example, label=code:useless]
+\begin{lstlisting}[language=Python, caption=Python example., label=code:useless]
 # Take the user's input
 words = input("Enter the text to translate to pig latin: ")
 print(f"You entered: {words}")
